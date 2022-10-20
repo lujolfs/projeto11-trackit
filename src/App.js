@@ -2,8 +2,10 @@ import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import styled from "styled-components";
 import GlobalStyle from "./GlobalStyle";
 import Formulario from "./Formulario";
+import FormularioNova from "./FormularioNova";
 import Cadastro from "./Cadastro";
 import logo from "./assets/image/Group 8.png"
+import PossuiCadastro from "./PossuiCadastro";
 
 
 function App() {
@@ -14,6 +16,14 @@ function App() {
             <Logo src={logo}/>
             <Formulario />
             <Cadastro/>
+            <br/>
+            *Quebra de página*
+            <br/>
+            <br/>
+            <br/>
+            <Logo src={logo}/>
+            <FormularioNova />
+            <PossuiCadastro />
         </Container>
     </BrowserRouter>
   );
