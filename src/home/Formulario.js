@@ -26,6 +26,7 @@ border-radius: 5px;
 width: 303px;
 height: 45px;
 margin-bottom: 6px;
+padding-left: 10px;
 ::placeholder {
     color: #DBDBDB;
     padding-left: 10px;

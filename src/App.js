@@ -1,35 +1,28 @@
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import styled from "styled-components";
 import GlobalStyle from "./GlobalStyle";
-import Formulario from "./Formulario";
-import FormularioNova from "./FormularioNova";
-import Cadastro from "./Cadastro";
-import logo from "./assets/image/Group 8.png"
-import PossuiCadastro from "./PossuiCadastro";
+import Homepage from "./home/Homepage";
+import Cadastro from "./cadastro/Cadastro";
+import Habitos from "./habitos/Habitos";
+import Hoje from "./hoje/Hoje";
+import Historico from "./historico/Historico";
 
-
-function App() {
+export default function App() {
   return (
     <BrowserRouter>
         <Container>
           <GlobalStyle/>
-            <Logo src={logo}/>
-            <Formulario />
-            <Cadastro/>
-            <br/>
-            *Quebra de página*
-            <br/>
-            <br/>
-            <br/>
-            <Logo src={logo}/>
-            <FormularioNova />
-            <PossuiCadastro />
+          <Routes>
+            <Route path="/" element={<Homepage/>} />
+            <Route path="/cadastro" element={<Cadastro/>} />
+            <Route path="/habitos" element={<Habitos/>} />
+            <Route path="/hoje" element={<Hoje/>} />
+            <Route path="/historico" element={<Historico/>} />
+          </Routes>
         </Container>
     </BrowserRouter>
   );
 }
-
-export default App;
 
 
 const Container = styled.div`
@@ -43,7 +36,4 @@ display: flex;
 flex-direction: column;
 align-items: center;
 justify-content: center;
-`
-
-const Logo = styled.img`
 `

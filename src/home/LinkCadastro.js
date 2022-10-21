@@ -1,15 +1,15 @@
 import styled from "styled-components"
 
-export default function Cadastro() {
+export default function LinkCadastro() {
     return (
-        <LinkCadastro>
+        <UrlCadastro>
             Não tem uma conta? Cadastre-se!
-        </LinkCadastro>
+        </UrlCadastro>
     )
 
 }
 
-const LinkCadastro = styled.div`
+const UrlCadastro = styled.div`
 color: #52B6FF;
 font-size: 14px;
 font-weight: 400;
