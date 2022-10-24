@@ -6,7 +6,10 @@ import FormularioNova from "./FormularioNova";
 import PossuiCadastro from "./PossuiCadastro";
 
 
+
 export default function Cadastro() {
+
+
   return (
         <Container>
             <Logo src={logo}/>

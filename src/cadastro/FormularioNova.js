@@ -1,15 +1,52 @@
-import styled from "styled-components"
+import styled from "styled-components";
+import { useState } from "react";
+import avatar from '../assets/image/avatar.jpg'
+import axios from 'axios';
 
 export default function FormularioNova() {
+    const [form, setForm] = useState({
+        email: '',
+        name: '',
+        image: '',
+        password: ''
+    });
+    const [disabled, setDisabled] = useState(false)
+
+    function fazerCadastro (event) {
+        const envio = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up', form);
+        event.preventDefault();
+        console.log(form);
+        setDisabled(true);
+        envio.then(checkPost);
+        envio.catch(checkError);
+        };
+
     return (
-        <Formu>
-                <Campo type="text" name="email" placeholder="email"/>
-                <Campo type="text" name="senha" placeholder="senha"/>
-                <Campo type="text" name="nome" placeholder="nome"/>
-                <Campo type="text" name="foto" placeholder="foto"/>
+        <Formu onSubmit={fazerCadastro}>
+                <Campo type="text" name="email" placeholder="email" value={form.email} onChange={handleForm} disabled={disabled}/>
+                <Campo type="password" name="password" placeholder="senha" value={form.password} onChange={handleForm} disabled={disabled}/>
+                <Campo type="text" name="name" placeholder="nome" value={form.name} onChange={handleForm} disabled={disabled}/>
+                <Campo type="text" name="image" placeholder="foto" value={form.image} onChange={handleForm} disabled={disabled}/>
                 <Entrar>Cadastrar</Entrar>
         </Formu>
     )
+
+    function handleForm(e) {
+        setForm({
+            ...form,
+            [e.target.name]: e.target.value,
+        })
+    }
+    
+    function checkPost(response) {
+        setDisabled(false);
+        console.log(response)
+    }
+
+    function checkError(error) {
+        setDisabled(false);
+        console.log(error)
+    }
 
 }
 
@@ -28,9 +65,10 @@ border-radius: 5px;
 width: 303px;
 height: 45px;
 margin-bottom: 6px;
+padding-left: 10px;
+
 ::placeholder {
     color: #DBDBDB;
-    padding-left: 10px;
 }
 
 `
@@ -42,7 +80,7 @@ background-color: #52B6FF;
 border: none;
 border: 1px solid #52B6FF;
 border-radius: 5px;
-width: 303px;
+width: 313px;
 height: 45px;
 color: #FFFFFF;
 margin-bottom: 25px;

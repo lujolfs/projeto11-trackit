@@ -30,7 +30,6 @@ margin-bottom: 6px;
 padding-left: 10px;
 ::placeholder {
     color: #DBDBDB;
-    padding-left: 10px;
 }
 
 `
