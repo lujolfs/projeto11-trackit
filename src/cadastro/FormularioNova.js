@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { useState } from "react";
-import avatar from '../assets/image/avatar.jpg'
 import axios from 'axios';
 
 export default function FormularioNova() {
@@ -15,7 +14,6 @@ export default function FormularioNova() {
     function fazerCadastro (event) {
         const envio = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up', form);
         event.preventDefault();
-        console.log(form);
         setDisabled(true);
         envio.then(checkPost);
         envio.catch(checkError);
@@ -40,12 +38,16 @@ export default function FormularioNova() {
     
     function checkPost(response) {
         setDisabled(false);
-        console.log(response)
     }
 
     function checkError(error) {
         setDisabled(false);
-        console.log(error)
+        setForm({
+            email: '',
+            name: '',
+            image: '',
+            password: ''
+        })
     }
 
 }

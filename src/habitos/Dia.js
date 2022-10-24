@@ -1,10 +1,27 @@
 import styled from "styled-components";
+import { useState }  from 'react';
 
 export default function Dia(props) {
-    const {dia, inicial} = props
+    const {nome, dia, inicial, selecionados, setSelecionados} = props
+    const [diaSelect, setDiaSelect] = useState(true);
+    const conjSelec = selecionados;
+
+    function pintaDia() {
+        setDiaSelect(!diaSelect);
+        if (diaSelect) {
+            conjSelec.push(dia);
+            console.log(conjSelec);
+            setSelecionados(conjSelec);
+        } else {
+            conjSelec.splice(conjSelec.indexOf(dia), 1);
+            setSelecionados(conjSelec);
+        }
+    }
 
     return (
-        <Dias>
+        <Dias 
+        diaSelect={diaSelect}
+        onClick={pintaDia}>
             {inicial}
         </Dias>
     )
@@ -13,7 +30,8 @@ export default function Dia(props) {
 const Dias = styled.div`
 height: 30px;
 width: 30px;
-color: #D5D5D5;
+color: ${props => props.diaSelect ? "#D5D5D5" : "#FFFFFF"};
+background: ${props => props.diaSelect ? "#FFFFFF" : "#D5D5D5"};
 display: flex;
 justify-content: center;
 align-items: center;

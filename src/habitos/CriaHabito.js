@@ -1,41 +1,87 @@
 import styled from "styled-components";
 import Dia from "./Dia.js"
+import { useState } from 'react';
+import axios from 'axios';
 
-export default function CriaHabito() {
+export default function CriaHabito(props) {
+const {setPressButton} = props
 const dias = [
-{dia:  "domingo", inicial: "D"},
-{dia:  "segunda-feira", inicial: "S"},
-{dia:  "terça-feira", inicial: "T"},
-{dia:  "quarta-feira", inicial: "Q"},
-{dia:  "quinta-feira", inicial: "Q"},
-{dia:  "sexta-feira", inicial: "S"},
-{dia:  "sábado", inicial: "S"},
+{nome:  "domingo", dia: 0, inicial: "D"},
+{nome:  "segunda-feira", dia: 1, inicial: "S"},
+{nome:  "terça-feira", dia: 2, inicial: "T"},
+{nome:  "quarta-feira", dia: 3, inicial: "Q"},
+{nome:  "quinta-feira", dia: 4, inicial: "Q"},
+{nome:  "sexta-feira", dia: 5, inicial: "S"},
+{nome:  "sábado", dia: 6, inicial: "S"},
 ]
+
+const config = {
+  headers: {
+    "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NjY2MiwiaWF0IjoxNjY2NjExMDQzfQ.E788i9gQ1CiL7vs4IMA0ZwEuDhLRrCl0qJncJGrLSWw"
+  }
+}
+
+const [selecionados, setSelecionados] = useState([])
+const [habitoNovo, setHabitoNovo] = useState({
+  name: '',
+  days: selecionados,
+});
 
     return (
           <Container>
             <PopCriaHabito>
               <Input>
-                <Campo type="text" name="nome-do-habito" placeholder="nome do hábito"/>
+                <Campo type="text" name="name" placeholder="nome do hábito" value={habitoNovo.name} onChange={handleHabit} />
                 <Dias>
                   {dias.map((dias, index) =>
                   (
                   <Dia 
+                  nome = {dias.nome}
                   dia = {dias.dia}
                   inicial = {dias.inicial}
                   key = {index}
                   index = {index}
+                  selecionados = {selecionados}
+                  setSelecionados = {setSelecionados}
                   />
                   ))}
                 </Dias>
               </Input>
               <Botoes>
-                <Cancelar>Cancelar</Cancelar>
-                <Salvar>Salvar</Salvar>
+                <Cancelar onClick={cancelaHabito}>Cancelar</Cancelar>
+                <Salvar onClick={salvarHabito}>Salvar</Salvar>
               </Botoes>
             </PopCriaHabito>
           </Container>
     );
+
+    function handleHabit(e) {
+      setHabitoNovo({
+          ...habitoNovo,
+          [e.target.name]: e.target.value,
+      })
+  }
+
+    function salvarHabito() {
+      console.log(habitoNovo);
+      console.log(selecionados);
+      const sentHabit = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits', habitoNovo, config);
+      sentHabit.then(completeHabit);
+      sentHabit.catch(checkError);
+      }
+
+    function completeHabit(response) {
+      console.log(response);
+    }
+
+    function checkError(error) {
+      console.log(error);
+    }
+
+    function cancelaHabito() {
+      setPressButton(false);
+    }
+
   }
 
   const Container = styled.div`
@@ -75,7 +121,6 @@ const dias = [
   padding-left: 10px;
   ::placeholder {
     color: #DBDBDB;
-    padding-left: 10px;
   }
   :focus {
     border-color: #666666;

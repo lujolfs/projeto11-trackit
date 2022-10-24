@@ -1,14 +1,52 @@
 import styled from "styled-components"
-import {Link} from 'react-router-dom'
+import { useState } from "react";
+import {Link, NavLink, useNavigate} from 'react-router-dom'
+import axios from 'axios';
+
+
 
 export default function Formulario() {
+    const [form, setForm] = useState({
+        email: '',
+        password: ''
+    });
+    const [link, setLink] = useState("");
+    const [disabled, setDisabled] = useState(false);
+    const navigate = useNavigate()
+
+    function fazerLogin (event) {
+        const login = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login', form);
+        event.preventDefault();
+        setDisabled(true);
+        login.then(completeLogin);
+        login.catch(checkError);
+        };
+
     return (
-        <Formu>
-                <Campo type="text" name="email" placeholder="email"/>
-                <Campo type="text" name="senha" placeholder="senha"/>
-                <Link to={`/habitos`}><Entrar>Entrar</Entrar></Link>
+        <Formu onSubmit={fazerLogin}>
+                <Campo type="text" name="email" placeholder="email" value={form.email} onChange={handleForm} disabled={disabled}/>
+                <Campo type="password" name="password" placeholder="senha" value={form.password} onChange={handleForm} disabled={disabled}/>
+                <Entrar disabled={disabled}>Entrar</Entrar>
         </Formu>
     )
+
+    function handleForm(e) {
+        setForm({
+            ...form,
+            [e.target.name]: e.target.value,
+        })
+    }
+
+    function completeLogin(response) {
+        setDisabled(false);
+        navigate("/hoje");
+        console.log(response);
+    }
+
+    function checkError(error) {
+        alert("O usuário e/ou a senha está(ão) incorreto(s)");
+        setDisabled(false);
+    }
 
 }
 
@@ -41,7 +79,7 @@ background-color: #52B6FF;
 border: none;
 border: 1px solid #52B6FF;
 border-radius: 5px;
-width: 303px;
+width: 313px;
 height: 45px;
 color: #FFFFFF;
 margin-bottom: 25px;

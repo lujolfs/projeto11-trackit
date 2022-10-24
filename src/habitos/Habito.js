@@ -2,11 +2,11 @@ import styled from "styled-components";
 import CriaHabito from "./CriaHabito";
 import logo from "../assets/image/Group 8.png"
 
-export default function Habito() {
+export default function Habito(props) {
+    const {setPressButton} = props
     return (
           <Container>
-                <CriaHabito/>
-                <Span>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</Span>
+                <CriaHabito setPressButton={setPressButton}/>
           </Container>
     );
   }
@@ -17,7 +17,6 @@ export default function Habito() {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 10px;
   `
   
   const Span = styled.span`
