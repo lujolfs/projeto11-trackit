@@ -27,7 +27,6 @@ export default function App() {
 
 const Container = styled.div`
 position: absolute;
-height: 100%;
 width: 100%;
 font-family: 'Lexend Deca', sans-serif;
 font-size: 35px;

@@ -21,7 +21,7 @@ const config = {
   }
 }
 
-const [selecionados, setSelecionados] = useState([])
+const [selecionados, setSelecionados] = useState([9, 9, 9, 9, 9, 9, 9])
 const [habitoNovo, setHabitoNovo] = useState({
   name: '',
   days: selecionados,

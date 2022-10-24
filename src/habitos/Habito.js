@@ -18,9 +18,3 @@ export default function Habito(props) {
   align-items: center;
   justify-content: center;
   `
-  
-  const Span = styled.span`
-  font-size: 18px;
-  color: #666666;
-  width: 340px;
-  `

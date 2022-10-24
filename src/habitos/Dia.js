@@ -9,8 +9,7 @@ export default function Dia(props) {
     function pintaDia() {
         setDiaSelect(!diaSelect);
         if (diaSelect) {
-            conjSelec.push(dia);
-            console.log(conjSelec);
+            conjSelec.splice(dia, 1, dia)
             setSelecionados(conjSelec);
         } else {
             conjSelec.splice(conjSelec.indexOf(dia), 1);
