@@ -20,10 +20,8 @@ export default function Cadastro() {
 }
 
 const Container = styled.div`
-position: absolute;
-height: 100%;
-width: 100%;
 font-family: 'Lexend Deca', sans-serif;
+margin: 150px;
 font-size: 35px;
 background-color: white;
 display: flex;

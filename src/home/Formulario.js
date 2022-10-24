@@ -54,6 +54,7 @@ const Formu = styled.form`
 display: flex;
 flex-direction: column;
 align-items: center;
+justify-content: center;
 `
 
 const Campo = styled.input`

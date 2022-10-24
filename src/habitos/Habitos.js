@@ -11,7 +11,7 @@ export default function Habitos() {
   const [naoTemHabito, setNaoTemHabito] = useState(true);
   const [pressButton, setPressButton] = useState(false);
   const [habitoSalvo, setHabitoSalvo] = useState([]);
-  let savedHabit
+  const [deletado, setDeletado] = useState()
   const config = {
     headers: {
       "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NjY2MiwiaWF0IjoxNjY2NjExMDQzfQ.E788i9gQ1CiL7vs4IMA0ZwEuDhLRrCl0qJncJGrLSWw"
@@ -53,6 +53,9 @@ export default function Habitos() {
                 id = {habits.id}
                 key = {habits.id}
                 name = {habits.name}
+                deletado = {deletado}
+                setDeletado = {setDeletado}
+                setNaoTemHabito = {setNaoTemHabito}
                 />
               ))}
               

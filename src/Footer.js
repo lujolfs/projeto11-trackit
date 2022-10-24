@@ -51,8 +51,8 @@ export default function Footer() {
   `
 
   const ProgBar = styled.div`
-  width: 91px;
-  height: 91px;
+  width: 82px;
+  height: 82px;
   padding-bottom: 30px;
   z-index: 10;
   `

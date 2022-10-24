@@ -37,4 +37,5 @@ align-items: center;
 font-size: 20px;
 border: 1px solid #D5D5D5;
 border-radius: 5px;
+margin: 2px;
 `

@@ -32,6 +32,7 @@ const [habitoNovo, setHabitoNovo] = useState({
             <PopCriaHabito>
               <Input>
                 <Campo type="text" name="name" placeholder="nome do hábito" value={habitoNovo.name} onChange={handleHabit} />
+                <ion-icon name="trash-outline"></ion-icon>
                 <Dias>
                   {dias.map((dias, index) =>
                   (

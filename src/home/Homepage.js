@@ -5,7 +5,6 @@ import Cadastro from "./LinkCadastro";
 import logo from "../assets/image/Group 8.png"
 import axios from 'axios';
 
-
 export default function Homepage() {
   return (
         <Container>
@@ -17,9 +16,8 @@ export default function Homepage() {
 }
 
 const Container = styled.div`
-position: absolute;
-height: 100%;
 width: 100%;
+margin: 150px;
 font-family: 'Lexend Deca', sans-serif;
 font-size: 35px;
 background-color: white;
