@@ -8,10 +8,11 @@ import axios from 'axios';
 import HabitoSalvo from "./HabitoSalvo";
 
 export default function Habitos() {
+
   const [naoTemHabito, setNaoTemHabito] = useState(true);
   const [pressButton, setPressButton] = useState(false);
   const [habitoSalvo, setHabitoSalvo] = useState([]);
-  const [deletado, setDeletado] = useState()
+  const [teste, setTeste] = useState(true);
   const config = {
     headers: {
       "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NjY2MiwiaWF0IjoxNjY2NjExMDQzfQ.E788i9gQ1CiL7vs4IMA0ZwEuDhLRrCl0qJncJGrLSWw"
@@ -19,54 +20,71 @@ export default function Habitos() {
   }
   const promise = axios.get(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits`, config)
 
-  useEffect(() => {
-    promise.then( res => {
-      console.log(res.data);
-      setHabitoSalvo(res.data);
-      if (res.data) {
-        setNaoTemHabito(false);
-      }
-      
-    }
-
-    )
-}, []);
-
-    return (
-          <Container>
-            <Header/>
-            <MeusHabitos>
-                <SubContainer>
-                    <h1>Meus hábitos</h1>
-                    <AddHabitos onClick={() => setPressButton(true)}>+</AddHabitos>
-                </SubContainer>
-            </MeusHabitos>
-            <SubContainer2>
-              {pressButton ? <Habito setPressButton={setPressButton}/> : ""}
-            </SubContainer2>
-            <SubContainer3>
-              {naoTemHabito ? <Span>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</Span> :
-              habitoSalvo.map((habits) => 
-              (
-                <HabitoSalvo
-                days = {habits.days}
-                id = {habits.id}
-                key = {habits.id}
-                name = {habits.name}
-                deletado = {deletado}
-                setDeletado = {setDeletado}
-                setNaoTemHabito = {setNaoTemHabito}
-                />
-              ))}
-              
-            </SubContainer3>
-            <Footer/>
-          </Container>
-    );
-
+  function trazHabito() {
+    setTimeout(function tempo() {
+      promise.then(res => {
+        console.log(res.data);
+        setHabitoSalvo(res.data);
+        if (res.data.length > 0) {
+          console.log(res.data)
+          setNaoTemHabito(false);
+        } else {
+          setNaoTemHabito(true);
+        }
+      })
+    }, 1000)
   }
 
-  const Container = styled.div`
+  function updateHabits(habito, operation) {
+    console.log(habito, operation)
+    if (operation === "delete") {
+      return setHabitoSalvo(
+        habitoSalvo.filter(juninho => juninho.id !== habito.id)) 
+    }
+    setHabitoSalvo(prev => {
+      return [...prev, habito]
+    })
+  }
+
+  useEffect(() => { trazHabito() }, []);
+
+  return (
+    <Container>
+      <Header />
+      <MeusHabitos>
+        <SubContainer>
+          <h1>Meus hábitos</h1>
+          <AddHabitos onClick={() => setPressButton(true)}>+</AddHabitos>
+        </SubContainer>
+      </MeusHabitos>
+      <SubContainer2>
+        {pressButton ? <Habito setPressButton={setPressButton} reload={updateHabits} /> : ""}
+      </SubContainer2>
+      <SubContainer3>
+        {naoTemHabito ? <Span>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</Span> :
+          habitoSalvo.map((habits) =>
+          (
+            <HabitoSalvo
+              days={habits.days}
+              id={habits.id}
+              key={habits.id}
+              name={habits.name}
+              habitoSalvo={habitoSalvo}
+              setHabitoSalvo={setHabitoSalvo}
+              reload={updateHabits}
+            />
+          ))}
+
+      </SubContainer3>
+      <SubContainer4>
+      </SubContainer4>
+      <Footer />
+    </Container>
+  );
+
+}
+
+const Container = styled.div`
   height: 100%;
   width: 100%;
   font-family: 'Lexend Deca', sans-serif;
@@ -75,16 +93,17 @@ export default function Habitos() {
   display: flex;
   flex-direction: column;
   align-items: center;
+  overflow:scroll;
   
   `
-  const Span = styled.span`
+const Span = styled.span`
   font-size: 18px;
   color: #666666;
   padding-left: 10px;
   width: 340px;
   `
 
-  const MeusHabitos = styled.div`
+const MeusHabitos = styled.div`
   margin-top: 20%;
   margin-bottom: 5%;
   width: 100%;
@@ -95,7 +114,7 @@ export default function Habitos() {
   /* justify-content: space-between; */
   `
 
-  const SubContainer = styled.div`
+const SubContainer = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
@@ -103,7 +122,7 @@ export default function Habitos() {
   margin-right: 5px;
   margin-left: 5px;
   `
-  const SubContainer2 = styled.div`
+const SubContainer2 = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -111,7 +130,7 @@ export default function Habitos() {
   justify-content: center;
   `
 
-  const SubContainer3 = styled.div`
+const SubContainer3 = styled.div`
   width: 100%;
   margin-bottom: 20%;
   display: flex;
@@ -119,6 +138,12 @@ export default function Habitos() {
   align-items: center;
   justify-content: space-around;
   border-radius: 5px;
+  `
+
+const SubContainer4 = styled.div`
+  color: #F2F2F2;
+  position: fixed;
+  bottom: 0;
   `
 
 const AddHabitos = styled.button`

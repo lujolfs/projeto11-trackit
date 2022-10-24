@@ -1,14 +1,20 @@
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import styled from "styled-components";
-import logo from "../assets/image/Group 8.png"
+import Header from "../Header";
+import Footer from "../Footer";
+import 'dayjs/locale/pt-br';
 
 export default function Historico() {
+    const dayjs = require('dayjs')
+
     return (
           <Container>
-              <Logo src={logo}/>
-              Aqui vai ser a Página Historico
+            <Header/>
+            {dayjs().format('dddd, DD/MMMM')}
+            <Footer/>
           </Container>
     );
+    
   }
 
   const Container = styled.div`
@@ -17,7 +23,7 @@ export default function Historico() {
   width: 100%;
   font-family: 'Lexend Deca', sans-serif;
   font-size: 35px;
-  background-color: white;
+  background-color: #F2F2F2;
   display: flex;
   flex-direction: column;
   align-items: center;

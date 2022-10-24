@@ -28,6 +28,7 @@ export default function App() {
 const Container = styled.div`
 position: absolute;
 width: 100%;
+height:100%;
 font-family: 'Lexend Deca', sans-serif;
 font-size: 35px;
 background-color: white;
@@ -35,4 +36,5 @@ display: flex;
 flex-direction: column;
 align-items: center;
 justify-content: center;
+overflow: scroll;
 `

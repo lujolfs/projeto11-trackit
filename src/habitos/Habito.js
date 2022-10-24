@@ -1,12 +1,11 @@
 import styled from "styled-components";
 import CriaHabito from "./CriaHabito";
-import logo from "../assets/image/Group 8.png"
 
 export default function Habito(props) {
     const {setPressButton} = props
     return (
           <Container>
-                <CriaHabito setPressButton={setPressButton}/>
+                <CriaHabito setPressButton={setPressButton} reload={props.reload}/>
           </Container>
     );
   }

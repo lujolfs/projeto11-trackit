@@ -4,7 +4,7 @@ import { useState } from 'react';
 import axios from 'axios';
 
 export default function CriaHabito(props) {
-const {setPressButton} = props
+const {setPressButton, setForceRerender, forceRerender} = props
 const dias = [
 {nome:  "domingo", dia: 0, inicial: "D"},
 {nome:  "segunda-feira", dia: 1, inicial: "S"},
@@ -66,13 +66,17 @@ const [habitoNovo, setHabitoNovo] = useState({
     function salvarHabito() {
       console.log(habitoNovo);
       console.log(selecionados);
-      const sentHabit = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits', habitoNovo, config);
+      const sentHabit = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits', habitoNovo, config)
+      .then((response) => {
+        const data = response.data;
+        props.reload(response.data, "create")
+      });
       sentHabit.then(completeHabit);
       sentHabit.catch(checkError);
       }
 
     function completeHabit(response) {
-      console.log(response);
+      setPressButton(false);
     }
 
     function checkError(error) {

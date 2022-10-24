@@ -5,8 +5,7 @@ import trash from "../assets/image/trash-outline.svg"
 import axios from "axios";
 
 export default function HabitoSalvo(props) {
-  const { days, name, id, deletado, setDeletado, setNaoTemHabito } = props;
-
+  const { days, name, id, habitoSalvo, teste, setTeste  } = props;
   const dias = [
     { dia: "domingo", inicial: "D", posicao: 0 },
     { dia: "segunda-feira", inicial: "S", posicao: 1 },
@@ -51,7 +50,7 @@ export default function HabitoSalvo(props) {
     if (window.confirm("Você tem certeza que quer apagar esse hábito?")) {
       const solDelete = axios.delete(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}`, config);
       solDelete.then(del => {
-        setNaoTemHabito(false)
+        props.reload({id}, "delete");
       });
       solDelete.catch(erro => {
         console.log(erro.response.data)
@@ -61,6 +60,9 @@ export default function HabitoSalvo(props) {
     }
   }
 
+  function mudaoTeste() {
+    setTeste(!teste)
+  }
 }
 
 const Container = styled.div`
