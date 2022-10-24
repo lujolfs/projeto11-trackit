@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Header from "../Header";
 import Habito from "./Habito";
 import Footer from "../Footer";
+import HabitoSalvo from "./HabitoSalvo";
 
 export default function Habitos() {
     return (
@@ -14,6 +15,7 @@ export default function Habitos() {
                     <AddHabitos>+</AddHabitos>
                 </SubContainer>
             </MeusHabitos>
+            <HabitoSalvo/>
             <Habito/>
             <Footer/>
           </Container>
@@ -27,7 +29,7 @@ export default function Habitos() {
   width: 100%;
   font-family: 'Lexend Deca', sans-serif;
   font-size: 35px;
-  background-color: #E5E5E5;
+  background-color: #F2F2F2;
   display: flex;
   flex-direction: column;
   align-items: center;

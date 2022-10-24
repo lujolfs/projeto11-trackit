@@ -1,11 +1,12 @@
 import styled from "styled-components"
+import {Link} from 'react-router-dom'
 
 export default function Formulario() {
     return (
         <Formu>
                 <Campo type="text" name="email" placeholder="email"/>
                 <Campo type="text" name="senha" placeholder="senha"/>
-                <Entrar>Entrar</Entrar>
+                <Link to={`/habitos`}><Entrar>Entrar</Entrar></Link>
         </Formu>
     )
 

@@ -23,4 +23,5 @@ export default function Habito() {
   const Span = styled.span`
   font-size: 18px;
   color: #666666;
+  width: 340px;
   `
